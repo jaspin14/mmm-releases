@@ -1,0 +1,84 @@
+# Зеркало marketdb.info — РЕЗЕРВ для панели, когда marketdb не открывается (Cloudflare, блокировки в РФ).
+# Живёт в репозитории релизов (jaspin14/mmm-releases), ставится командой: python tools/marketdb_mirror/setup.py
+# Раз в сутки дважды: 00:01 и 01:01 МСК (= 21:01 и 22:01 UTC) — marketdb обновляет курсы летом в 00:00,
+# зимой в 01:00 МСК. Файлы — в ветке marketdb-mirror (один коммит, без истории, чтобы репозиторий не рос).
+# Не скачалось — в зеркале остаётся прошлый файл.
+name: marketdb mirror
+
+on:
+  schedule:
+    - cron: "1 21,22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: marketdb-mirror
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Fetch marketdb
+        shell: python
+        run: |
+          import json, os, subprocess, time, urllib.request, urllib.parse
+          REPO = os.environ["GITHUB_REPOSITORY"]
+          BRANCH = "marketdb-mirror"
+          API = "https://marketdb.info/api/v1"
+          UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+          # только курсы и магазин CS2 (цены Prime / Armory Pass во всех валютах); цены предметов не зеркалим.
+          # файл зеркала -> (путь API, параметры); имена — те же, что в Core/marketdb.py mirror_name()
+          FILES = {"exchange-rates.json": ("exchange-rates", {}),
+                   "store-items_730.json": ("store/items", {"game": 730})}
+
+          os.makedirs("out", exist_ok=True)
+          os.chdir("out")
+          sh = lambda *a: subprocess.run(a, check=True)
+          sh("git", "init", "-q")
+          sh("git", "remote", "add", "origin", f"https://x-access-token:{os.environ['TOKEN']}@github.com/{REPO}.git")
+          # прошлые файлы — чтобы то, что сейчас не скачалось, не пропало
+          if subprocess.run(["git", "fetch", "-q", "--depth", "1", "origin", BRANCH]).returncode == 0:
+              sh("git", "checkout", "-q", "FETCH_HEAD", "--", ".")
+          try:
+              meta = json.load(open("meta.json"))
+          except Exception:
+              meta = {}
+
+          ok = 0
+          for name, (path, params) in FILES.items():
+              url = f"{API}/{path}" + ("?" + urllib.parse.urlencode(params) if params else "")
+              for attempt in range(3):
+                  try:
+                      req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+                      body = urllib.request.urlopen(req, timeout=60).read()
+                      json.loads(body)   # не JSON (страница Cloudflare) — не сохраняем
+                      open(name, "wb").write(body)
+                      meta[name] = int(time.time())
+                      ok += 1
+                      print(f"ok   {name}  {len(body) // 1024} KB")
+                      break
+                  except Exception as e:
+                      print(f"fail {name} ({attempt + 1}/3): {type(e).__name__}: {str(e)[:120]}")
+                      time.sleep(5)
+          if not ok:
+              raise SystemExit("marketdb: nothing downloaded")
+          meta["updated"] = int(time.time())
+          json.dump(meta, open("meta.json", "w"), indent=1)
+
+          sh("git", "checkout", "-q", "--orphan", "tmp")
+          sh("git", "add", "-A")
+          sh("git", "-c", "user.name=mirror-bot", "-c", "user.email=mirror-bot@users.noreply.github.com",
+             "commit", "-q", "-m", f"marketdb mirror {time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime())}")
+          sh("git", "push", "-q", "-f", "origin", f"HEAD:refs/heads/{BRANCH}")
+          # CDN jsDelivr кэширует ветку до 12 ч — сбрасываем, чтобы второй адрес зеркала был свежим
+          for name in list(FILES) + ["meta.json"]:
+              try:
+                  urllib.request.urlopen(f"https://purge.jsdelivr.net/gh/{REPO}@{BRANCH}/{name}", timeout=30).read()
+              except Exception as e:
+                  print(f"purge {name}: {e}")
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
