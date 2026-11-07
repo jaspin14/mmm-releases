@@ -1,0 +1,280 @@
+{
+  "timestamp": 1794002400000,
+  "last_checked": 1794009994401,
+  "base": "USD",
+  "rates": [
+    {
+      "currency_id": 1,
+      "market_id": 2001,
+      "code": "USD",
+      "symbol": "$",
+      "rate": 1
+    },
+    {
+      "currency_id": 2,
+      "market_id": 2002,
+      "code": "GBP",
+      "symbol": "£",
+      "rate": 0.7495
+    },
+    {
+      "currency_id": 3,
+      "market_id": 2003,
+      "code": "EUR",
+      "symbol": "€",
+      "rate": 0.8986
+    },
+    {
+      "currency_id": 4,
+      "market_id": 2004,
+      "code": "CHF",
+      "symbol": "CHF",
+      "rate": 0.8222
+    },
+    {
+      "currency_id": 5,
+      "market_id": 2005,
+      "code": "RUB",
+      "symbol": "руб",
+      "rate": 82.011
+    },
+    {
+      "currency_id": 6,
+      "market_id": 2006,
+      "code": "PLN",
+      "symbol": "zł",
+      "rate": 3.953
+    },
+    {
+      "currency_id": 7,
+      "market_id": 2007,
+      "code": "BRL",
+      "symbol": "R$",
+      "rate": 5.523
+    },
+    {
+      "currency_id": 8,
+      "market_id": 2008,
+      "code": "JPY",
+      "symbol": "¥",
+      "rate": 158.524
+    },
+    {
+      "currency_id": 9,
+      "market_id": 2009,
+      "code": "NOK",
+      "symbol": "kr",
+      "rate": 9.486
+    },
+    {
+      "currency_id": 10,
+      "market_id": 2010,
+      "code": "IDR",
+      "symbol": "Rp",
+      "rate": 18103.132
+    },
+    {
+      "currency_id": 11,
+      "market_id": 2011,
+      "code": "MYR",
+      "symbol": "RM",
+      "rate": 4.065
+    },
+    {
+      "currency_id": 12,
+      "market_id": 2012,
+      "code": "PHP",
+      "symbol": "P",
+      "rate": 63.193
+    },
+    {
+      "currency_id": 13,
+      "market_id": 2013,
+      "code": "SGD",
+      "symbol": "S$",
+      "rate": 1.284
+    },
+    {
+      "currency_id": 14,
+      "market_id": 2014,
+      "code": "THB",
+      "symbol": "฿",
+      "rate": 33.654
+    },
+    {
+      "currency_id": 15,
+      "market_id": 2015,
+      "code": "VND",
+      "symbol": "₫",
+      "rate": 25602.5
+    },
+    {
+      "currency_id": 16,
+      "market_id": 2016,
+      "code": "KRW",
+      "symbol": "₩",
+      "rate": 1365.03
+    },
+    {
+      "currency_id": 17,
+      "market_id": 2017,
+      "code": "TRY",
+      "symbol": "TL",
+      "rate": 50.2
+    },
+    {
+      "currency_id": 18,
+      "market_id": 2018,
+      "code": "UAH",
+      "symbol": "₴",
+      "rate": 45.309
+    },
+    {
+      "currency_id": 19,
+      "market_id": 2019,
+      "code": "MXN",
+      "symbol": "Mex$",
+      "rate": 18.705
+    },
+    {
+      "currency_id": 20,
+      "market_id": 2020,
+      "code": "CAD",
+      "symbol": "CDN$",
+      "rate": 1.413
+    },
+    {
+      "currency_id": 21,
+      "market_id": 2021,
+      "code": "AUD",
+      "symbol": "A$",
+      "rate": 1.46
+    },
+    {
+      "currency_id": 22,
+      "market_id": 2022,
+      "code": "NZD",
+      "symbol": "NZ$",
+      "rate": 1.81
+    },
+    {
+      "currency_id": 23,
+      "market_id": 2023,
+      "code": "CNY",
+      "symbol": "¥",
+      "rate": 6.722
+    },
+    {
+      "currency_id": 24,
+      "market_id": 2024,
+      "code": "INR",
+      "symbol": "₹",
+      "rate": 94.113
+    },
+    {
+      "currency_id": 25,
+      "market_id": 2025,
+      "code": "CLP",
+      "symbol": "CLP",
+      "rate": 985.754
+    },
+    {
+      "currency_id": 26,
+      "market_id": 2026,
+      "code": "PEN",
+      "symbol": "S/.",
+      "rate": 3.44
+    },
+    {
+      "currency_id": 27,
+      "market_id": 2027,
+      "code": "COP",
+      "symbol": "COL$",
+      "rate": 3252.724
+    },
+    {
+      "currency_id": 28,
+      "market_id": 2028,
+      "code": "ZAR",
+      "symbol": "R",
+      "rate": 16.591
+    },
+    {
+      "currency_id": 29,
+      "market_id": 2029,
+      "code": "HKD",
+      "symbol": "HK$",
+      "rate": 7.845
+    },
+    {
+      "currency_id": 30,
+      "market_id": 2030,
+      "code": "TWD",
+      "symbol": "NT$",
+      "rate": 32.857
+    },
+    {
+      "currency_id": 31,
+      "market_id": 2031,
+      "code": "SAR",
+      "symbol": "SR",
+      "rate": 3.756
+    },
+    {
+      "currency_id": 32,
+      "market_id": 2032,
+      "code": "AED",
+      "symbol": "AED",
+      "rate": 3.675
+    },
+    {
+      "currency_id": 34,
+      "market_id": 2034,
+      "code": "ARS",
+      "symbol": "ARS$",
+      "rate": 1546.601
+    },
+    {
+      "currency_id": 35,
+      "market_id": 2035,
+      "code": "ILS",
+      "symbol": "₪",
+      "rate": 3.201
+    },
+    {
+      "currency_id": 37,
+      "market_id": 2037,
+      "code": "KZT",
+      "symbol": "₸",
+      "rate": 448.673
+    },
+    {
+      "currency_id": 38,
+      "market_id": 2038,
+      "code": "KWD",
+      "symbol": "KD",
+      "rate": 0.3081
+    },
+    {
+      "currency_id": 39,
+      "market_id": 2039,
+      "code": "QAR",
+      "symbol": "QR",
+      "rate": 3.648
+    },
+    {
+      "currency_id": 40,
+      "market_id": 2040,
+      "code": "CRC",
+      "symbol": "₡",
+      "rate": 454.35
+    },
+    {
+      "currency_id": 41,
+      "market_id": 2041,
+      "code": "UYU",
+      "symbol": "$U",
+      "rate": 40.369
+    }
+  ]
+}
